@@ -40,6 +40,12 @@ extends CharacterBody2D
 var SPEED : float = 100
 var DASH : float = 3000
 
+func _ready():
+	pass
+	
+func _process(delta):
+	pass
+
 func _physics_process(_delta):
 	var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 
