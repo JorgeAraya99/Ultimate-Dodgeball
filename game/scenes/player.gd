@@ -38,9 +38,14 @@ extends CharacterBody2D
 #	move_and_slide()
 
 var SPEED : float = 100
+var DASH : float = 3000
 
 func _physics_process(_delta):
 	var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 
 	velocity = input_direction * SPEED
+	
+	if Input.is_action_just_pressed("dash"):
+		velocity = input_direction * (SPEED + DASH)
+	
 	move_and_slide()
