@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 
@@ -45,6 +46,10 @@ func _ready():
 	
 func _process(delta):
 	pass
+
+func init(id):
+	set_multiplayer_authority(id)
+	name = str(id)
 
 func _physics_process(_delta)  -> void:
 	

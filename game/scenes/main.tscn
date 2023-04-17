@@ -19,7 +19,7 @@ size = Vector2(20, 255)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5x3op")
-Player = ExtResource("2_bt3dx")
+player_scene = ExtResource("2_bt3dx")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(32, 287)
@@ -36,10 +36,12 @@ shape = SubResource("RectangleShape2D_p4hsj")
 
 [node name="Players" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="Players"]
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Markers"]
 position = Vector2(124, 141)
 
-[node name="Marker2D2" type="Marker2D" parent="Players"]
+[node name="Marker2D2" type="Marker2D" parent="Markers"]
 position = Vector2(388, 141)
 
 [node name="Ball" parent="." instance=ExtResource("3_m0e2w")]

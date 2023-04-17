@@ -1,3 +1,3 @@
 extends Node
 
-var players = []
+var players: Array = []
