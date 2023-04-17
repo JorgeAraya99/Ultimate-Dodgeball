@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://sewngur0b3bu"]
+[gd_scene load_steps=9 format=3 uid="uid://sewngur0b3bu"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_5x3op"]
 [ext_resource type="Texture2D" uid="uid://da2adps55g23m" path="res://icon.svg" id="1_qiuvj"]
 [ext_resource type="PackedScene" uid="uid://b68wgany2pver" path="res://scenes/player.tscn" id="2_bt3dx"]
 [ext_resource type="PackedScene" uid="uid://bey32kpestb5n" path="res://scenes/ball.tscn" id="3_m0e2w"]
@@ -17,6 +18,8 @@ size = Vector2(20, 288)
 size = Vector2(20, 255)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_5x3op")
+Player = ExtResource("2_bt3dx")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(32, 287)
@@ -31,8 +34,13 @@ texture = ExtResource("1_qiuvj")
 position = Vector2(224, 0)
 shape = SubResource("RectangleShape2D_p4hsj")
 
-[node name="Player" parent="." instance=ExtResource("2_bt3dx")]
-position = Vector2(119, 53)
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Players"]
+position = Vector2(124, 141)
+
+[node name="Marker2D2" type="Marker2D" parent="Players"]
+position = Vector2(388, 141)
 
 [node name="Ball" parent="." instance=ExtResource("3_m0e2w")]
 position = Vector2(216, 69)

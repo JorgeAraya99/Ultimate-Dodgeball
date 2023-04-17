@@ -46,12 +46,20 @@ func _ready():
 func _process(delta):
 	pass
 
-func _physics_process(_delta):
-	var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
+func _physics_process(_delta)  -> void:
+	
+	if is_multiplayer_authority():
+		var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 
-	velocity = input_direction * SPEED
+		velocity = input_direction * SPEED
 	
-	if Input.is_action_just_pressed("dash"):
-		velocity = input_direction * (SPEED + DASH)
+		if Input.is_action_just_pressed("dash"):
+			velocity = input_direction * (SPEED + DASH)
 	
-	move_and_slide()
+		move_and_slide()
+		
+		rpc("send_position", global_position)
+		
+@rpc("unreliable_ordered")
+func send_position(pos: Vector2) -> void:
+	global_position = pos

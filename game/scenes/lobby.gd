@@ -60,6 +60,8 @@ func _on_connection_failed() -> void:
 func _on_peer_connected(id: int) -> void:
 	Debug.print("peer connected %d" % id)
 	rpc_id(id, "send_info", {"name": user.text})
+	if multiplayer.is_server():
+		status[id] = false
 
 func _on_peer_disconnected(id: int) -> void:
 	Debug.print("peer disconnected %d" % id)
@@ -72,6 +74,7 @@ func _add_player(name: String, id: int):
 	label.name = str(id)
 	label.text = name
 	players.add_child(label)
+	Game.players.append(id)
 
 @rpc("any_peer","reliable")
 func send_info(info: Dictionary):
