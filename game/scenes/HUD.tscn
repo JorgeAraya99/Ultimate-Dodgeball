@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://di545gebddhfm"]
+
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="1_torgh"]
+
+[node name="HUD" type="Node2D"]
+script = ExtResource("1_torgh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VIDAS" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "VIDAS:0"

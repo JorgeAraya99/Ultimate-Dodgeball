@@ -30,7 +30,7 @@ func _ready():
 	start.show()
 	pending.hide()
 	#user.text = OS.get_environment("USERNAME")
-	
+	cancel.pressed.connect(_on_cancel_pressed)
 	ok.pressed.connect(_on_ok_pressed)
 	
 func _on_host_pressed() -> void:
@@ -106,3 +106,16 @@ func player_ready():
 @rpc("any_peer", "call_local", "reliable")
 func start_game() -> void:
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+
+func _on_return_pressed():
+	get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+	
+	
+
+
+func _on_cancel_pressed():
+	
+	start.show()
+	pending.hide()
+	
