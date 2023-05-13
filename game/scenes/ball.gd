@@ -4,6 +4,8 @@ var inicio = 1
 
 func _physics_process(delta):
 	
+	set_motion_mode(1)
+	
 	if inicio == 1:
 		velocity = Vector2(200,200)
 		inicio = 0

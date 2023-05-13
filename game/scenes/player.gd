@@ -38,8 +38,14 @@ extends CharacterBody2D
 #
 #	move_and_slide()
 
-var SPEED : float = 100
-var DASH : float = 3000
+@onready var dash_timer: Timer = $dashTimer
+@onready var dash_cooldown: Timer = $dashCooldown
+
+var NORMALSPEED : float = 150
+var DASHSPEED : float = 500
+var DASHDURATION : float = .1
+var dashdirection = Vector2()
+var DASHCOOLDOWNDUR : float = 4
 
 func _ready():
 	pass
@@ -54,13 +60,20 @@ func init(id):
 func _physics_process(_delta)  -> void:
 	
 	if is_multiplayer_authority():
+		
+		set_motion_mode(1)
+		
 		var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
-
-		velocity = input_direction * SPEED
-	
-		if Input.is_action_just_pressed("dash"):
-			velocity = input_direction * (SPEED + DASH)
-	
+		if input_direction.length() > 1 : input_direction = input_direction.normalized()
+		
+		if Input.is_action_just_pressed("dash") and is_dashcooldown_down():
+			dashdirection = input_direction
+			start_dash(DASHDURATION)
+			start_dashcooldown(DASHCOOLDOWNDUR)
+			
+		var SPEED = DASHSPEED if is_dashing() else NORMALSPEED
+		velocity = dashdirection * SPEED if is_dashing() else input_direction * SPEED
+		
 		move_and_slide()
 		
 		rpc("send_position", global_position)
@@ -68,3 +81,17 @@ func _physics_process(_delta)  -> void:
 @rpc("unreliable_ordered")
 func send_position(pos: Vector2) -> void:
 	global_position = pos
+	
+func start_dash(dur) -> void:
+	dash_timer.wait_time = dur
+	dash_timer.start()
+	
+func is_dashing() -> bool:
+	return !dash_timer.is_stopped()
+
+func start_dashcooldown(dur) -> void:
+	dash_cooldown.wait_time = dur
+	dash_cooldown.start()
+	
+func is_dashcooldown_down() -> bool:
+	return dash_cooldown.is_stopped()
