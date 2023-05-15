@@ -46,6 +46,9 @@ var DASHSPEED : float = 500
 var DASHDURATION : float = .1
 var dashdirection = Vector2()
 var DASHCOOLDOWNDUR : float = 4
+var lookdirection = "front"
+
+@onready var player_animation: AnimationPlayer = $Sprite2D/PlayerAnimation
 
 func _ready():
 	pass
@@ -62,9 +65,13 @@ func _physics_process(_delta)  -> void:
 	if is_multiplayer_authority():
 		
 		set_motion_mode(1)
-		
+				
 		var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 		if input_direction.length() > 1 : input_direction = input_direction.normalized()
+		if input_direction.y < 0:
+			player_animation.play("idle_back")
+		else:
+			player_animation.play("idle_front")
 		
 		if Input.is_action_just_pressed("dash") and is_dashcooldown_down():
 			dashdirection = input_direction
@@ -73,7 +80,7 @@ func _physics_process(_delta)  -> void:
 			
 		var SPEED = DASHSPEED if is_dashing() else NORMALSPEED
 		velocity = dashdirection * SPEED if is_dashing() else input_direction * SPEED
-		
+				
 		move_and_slide()
 		
 		rpc("send_position", global_position)
