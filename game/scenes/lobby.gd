@@ -119,4 +119,8 @@ func _on_cancel_pressed():
 	start.show()
 	pending.hide()
 	#limpiar lista
+	#for child in players.childres ver esto dps
+	#borrar el hijo o remove
+	#borrar la memoria del hijo
+	multiplayer.multiplayer_peer = null
 	#mandar rpc de borrado de lobby
