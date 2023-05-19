@@ -48,6 +48,8 @@ var dashdirection = Vector2()
 var DASHCOOLDOWNDUR : float = 4
 var lookdirection = "front"
 
+var VIDA = 3
+
 @onready var player_animation: AnimationPlayer = $Sprite2D/PlayerAnimation
 
 func _ready():
@@ -72,6 +74,12 @@ func _physics_process(_delta)  -> void:
 			player_animation.play("idle_back")
 		else:
 			player_animation.play("idle_front")
+		
+		if false: #Checkeo de impacto con el balon
+			VIDA -= 1
+			
+		if VIDA < 1: #manejar derrota del player
+			pass
 		
 		if Input.is_action_just_pressed("dash") and is_dashcooldown_down():
 			dashdirection = input_direction

@@ -118,4 +118,5 @@ func _on_cancel_pressed():
 	
 	start.show()
 	pending.hide()
-	
+	#limpiar lista
+	#mandar rpc de borrado de lobby
