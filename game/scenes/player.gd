@@ -53,7 +53,12 @@ var VIDA = 3
 @onready var player_animation: AnimationPlayer = $Sprite2D/PlayerAnimation
 
 func _ready():
-	pass
+	
+	await get_tree().process_frame
+	if is_multiplayer_authority():
+		Global.player_master=self
+		
+	
 	
 func _process(delta):
 	pass
