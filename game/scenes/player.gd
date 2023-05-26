@@ -40,6 +40,7 @@ extends CharacterBody2D
 
 @onready var dash_timer: Timer = $dashTimer
 @onready var dash_cooldown: Timer = $dashCooldown
+@onready var COLISSION = $CollisionShape2D
 
 var NORMALSPEED : float = 150
 var DASHSPEED : float = 500
@@ -47,6 +48,8 @@ var DASHDURATION : float = .1
 var dashdirection = Vector2()
 var DASHCOOLDOWNDUR : float = 4
 var lookdirection = "front"
+
+
 
 var VIDA = 3
 
@@ -67,26 +70,34 @@ func init(id):
 	set_multiplayer_authority(id)
 	name = str(id)
 
+#func _on_Area2D_area_exited(area): 
+#	if area.get_name() == "Ball": 
+#		VIDA -= 1
+#		print("Vida total es " + str(VIDA))
+
+func _on_area_2d_area_entered(area):
+	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA > 0:
+		VIDA -= 1
+		print("Vida total es " + str(VIDA))
+
 func _physics_process(_delta)  -> void:
 	
 	if is_multiplayer_authority():
-		
+		Global.player_master_vida = VIDA
+		#print("La vida global del player es " + str(Global.player_master_vida))
 		set_motion_mode(1)
-				
 		var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 		if input_direction.length() > 1 : input_direction = input_direction.normalized()
 		if input_direction.y < 0:
 			player_animation.play("idle_back")
 		else:
 			player_animation.play("idle_front")
-		
-		if false: #Checkeo de impacto con el balon
-			VIDA -= 1
 			
-		#if VIDA < 1: #manejar derrota del player
-		#	pass
 		
-		if Input.is_action_just_pressed("dash") and is_dashcooldown_down() and VIDA>1:
+		#if VIDA == 0:
+		#	COLISSION.disabled == true
+		
+		if Input.is_action_just_pressed("dash") and is_dashcooldown_down():
 			dashdirection = input_direction
 			start_dash(DASHDURATION)
 			start_dashcooldown(DASHCOOLDOWNDUR)
@@ -94,7 +105,8 @@ func _physics_process(_delta)  -> void:
 		var SPEED = DASHSPEED if is_dashing() else NORMALSPEED
 		velocity = dashdirection * SPEED if is_dashing() else input_direction * SPEED
 				
-		move_and_slide()
+		if VIDA >0:
+			move_and_slide()
 		
 		rpc("send_position", global_position)
 		
@@ -115,3 +127,9 @@ func start_dashcooldown(dur) -> void:
 	
 func is_dashcooldown_down() -> bool:
 	return dash_cooldown.is_stopped()
+
+
+
+
+
+

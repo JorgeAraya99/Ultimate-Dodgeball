@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bey32kpestb5n"]
+[gd_scene load_steps=6 format=3 uid="uid://bey32kpestb5n"]
 
 [ext_resource type="Script" path="res://scenes/ball.gd" id="1_4i7ww"]
 [ext_resource type="Texture2D" uid="uid://cc5mh74srlgu6" path="res://assets/Skull/Idle 1 (52x54).png" id="2_gdcg7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q0ay6"]
+radius = 19.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ylji7"]
 radius = 19.0
@@ -12,7 +15,16 @@ properties/0/spawn = true
 properties/0/sync = true
 
 [node name="Ball" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_4i7ww")
+
+[node name="Balon" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Balon"]
+shape = SubResource("CircleShape2D_q0ay6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ylji7")

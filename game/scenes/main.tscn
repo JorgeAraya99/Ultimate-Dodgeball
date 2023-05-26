@@ -916,15 +916,23 @@ layer_0/tile_data = PackedInt32Array(0, 4325376, 2, 65536, 4325376, 3, 1, 439091
 
 [node name="Pared_Vertical2" parent="." instance=ExtResource("5_s8axu")]
 position = Vector2(640, 180)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Pared_Vertical" parent="." instance=ExtResource("5_s8axu")]
 position = Vector2(8, 180)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Pared_Horizontal" parent="." instance=ExtResource("4_ohsnj")]
-position = Vector2(320, 344)
+position = Vector2(323, 344)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Pared_Horizontal2" parent="." instance=ExtResource("6_hf214")]
 position = Vector2(320, 16)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Players" type="Node2D" parent="."]
 
@@ -942,3 +950,12 @@ position = Vector2(216, 69)
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 script = ExtResource("8_ql7xy")
+
+[node name="HUD" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Label" type="Label" parent="Camera2D/HUD"]
+offset_left = 508.0
+offset_top = 33.0
+offset_right = 633.0
+offset_bottom = 56.0
+horizontal_alignment = 2
