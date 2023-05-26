@@ -119,8 +119,13 @@ func _on_cancel_pressed():
 	start.show()
 	pending.hide()
 	#limpiar lista
-	#for child in players.childres ver esto dps
-	#borrar el hijo o remove
+	#while Game.players.get_child_count() > 0:
+	#	var child = Game.players.get_child(0)
+	#	child.queue_free()
+	for child in players.get_children():
+		child.queue_free()
+		
+	Game.players.clear()
 	#borrar la memoria del hijo
 	multiplayer.multiplayer_peer = null
 	#mandar rpc de borrado de lobby

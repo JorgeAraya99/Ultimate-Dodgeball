@@ -83,10 +83,10 @@ func _physics_process(_delta)  -> void:
 		if false: #Checkeo de impacto con el balon
 			VIDA -= 1
 			
-		if VIDA < 1: #manejar derrota del player
-			pass
+		#if VIDA < 1: #manejar derrota del player
+		#	pass
 		
-		if Input.is_action_just_pressed("dash") and is_dashcooldown_down():
+		if Input.is_action_just_pressed("dash") and is_dashcooldown_down() and VIDA>1:
 			dashdirection = input_direction
 			start_dash(DASHDURATION)
 			start_dashcooldown(DASHCOOLDOWNDUR)
