@@ -41,6 +41,10 @@ extends CharacterBody2D
 @onready var dash_timer: Timer = $dashTimer
 @onready var dash_cooldown: Timer = $dashCooldown
 @onready var COLISSION = $CollisionShape2D
+@onready var player_animation: AnimationPlayer = $PlayerAnimation
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback = animation_tree.get("parameters/playback")
+
 
 var NORMALSPEED : float = 150
 var DASHSPEED : float = 500
@@ -53,12 +57,11 @@ var lookdirection = "front"
 
 var VIDA = 3
 
-@onready var player_animation: AnimationPlayer = $Sprite2D/PlayerAnimation
-
 func _ready():
 	
 	await get_tree().process_frame
 	if is_multiplayer_authority():
+		animation_tree.active = true
 		Global.player_master=self
 		
 	
@@ -88,12 +91,6 @@ func _physics_process(_delta)  -> void:
 		set_motion_mode(1)
 		var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
 		if input_direction.length() > 1 : input_direction = input_direction.normalized()
-		if input_direction.y < 0:
-			player_animation.play("idle_back")
-		else:
-			player_animation.play("idle_front")
-			
-		
 		#if VIDA == 0:
 		#	COLISSION.disabled == true
 		
@@ -109,10 +106,28 @@ func _physics_process(_delta)  -> void:
 			move_and_slide()
 		
 		rpc("send_position", global_position)
+		rpc("send_velocity", velocity)
+		
+	if velocity.length() == 0:
+		playback.travel("idle_front")
+	else:
+		if velocity.y > 0:
+			playback.travel("move_front")
+		elif velocity.y < 0:
+			playback.travel("move_back")
+		else:
+			if velocity.x < 0:
+				playback.travel("move_left")
+			else:
+				playback.travel("move_right")
 		
 @rpc("unreliable_ordered")
 func send_position(pos: Vector2) -> void:
 	global_position = pos
+	
+@rpc("unreliable_ordered")
+func send_velocity(vel: Vector2) -> void:
+	velocity = vel
 	
 func start_dash(dur) -> void:
 	dash_timer.wait_time = dur
