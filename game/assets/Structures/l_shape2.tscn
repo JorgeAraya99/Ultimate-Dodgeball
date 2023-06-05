@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqjv34s0a2ecj"]
+[gd_scene load_steps=4 format=3 uid="uid://buju5ewkim6o8"]
 
-[ext_resource type="Texture2D" uid="uid://bp3c1ytdxkd2k" path="res://assets/Map/tileset x1.png" id="1_nu5k5"]
+[ext_resource type="Texture2D" uid="uid://bp3c1ytdxkd2k" path="res://assets/Map/tileset x1.png" id="1_3plee"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7vs6"]
-texture = ExtResource("1_nu5k5")
+texture = ExtResource("1_3plee")
 4:0/0 = 0
 5:0/0 = 0
 6:0/0 = 0
@@ -899,13 +899,16 @@ texture = ExtResource("1_nu5k5")
 sources/0 = SubResource("TileSetAtlasSource_p7vs6")
 
 [node name="L-shape" type="StaticBody2D"]
+position = Vector2(323, 193)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="Sprite2D"]
 tile_set = SubResource("TileSet_miv6g")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 1179648, 18, 65536, 1179648, 19, 1, 1638400, 2, 65537, 1638400, 3, 2, 1179648, 18, 65538, 1179648, 19, 65535, 1114112, 18, 131071, 1114112, 19, 196607, 1114112, 19, 262143, 1114112, 19, 327679, 1114112, 19, 393215, 983040, 2, 3, 1638400, 2, 65539, 1638400, 3, 4, 1835008, 10, 65540, 1835008, 11, 5, 1900544, 10, 65541, 1900544, 11, 458751, 1245184, 7)
+layer_0/tile_data = PackedInt32Array(65535, 262144, 18, 131071, 262144, 19, 196607, 262144, 19, 262143, 262144, 19, 327679, 262144, 19, 393215, 131072, 6, 65534, 196608, 18, 131070, 196608, 19, 65533, 917504, 20, 131069, 917504, 21, 65532, 1769472, 2, 131068, 1769472, 3, 65531, 1835008, 14, 131067, 1835008, 15, 65530, 1638400, 2, 131066, 1638400, 3, 65529, 1572864, 2, 131065, 1572864, 3, 458751, 131072, 7)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 112, -8, 112, -8, 0, 96, 0, 96, 32, 0, 32)
+polygon = PackedVector2Array(-8, 112, -16, 112, -16, 32, -112, 32, -112, 0, -8, 0)
