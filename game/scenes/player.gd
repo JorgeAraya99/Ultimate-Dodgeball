@@ -53,6 +53,8 @@ var dashdirection = Vector2()
 var DASHCOOLDOWNDUR : float = 4
 var lookdirection = "front"
 
+signal dead(playerid)
+
 
 
 var VIDA = 3
@@ -72,6 +74,8 @@ func _process(delta):
 func init(id):
 	set_multiplayer_authority(id)
 	name = str(id)
+	Game.players_id.append(id)
+	Game.players_life[id]=(VIDA)
 
 #func _on_Area2D_area_exited(area): 
 #	if area.get_name() == "Ball": 
@@ -81,12 +85,22 @@ func init(id):
 func _on_area_2d_area_entered(area):
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA > 0:
 		VIDA -= 1
+		Game.players_life[multiplayer.get_unique_id()]-=1 
+		
+	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA==0:
+		VIDA -= 1
+		Game.players_life[multiplayer.get_unique_id()]-=1 
+		emit_signal("dead",multiplayer.get_unique_id())
+		
+	
+		
 		print("Vida total es " + str(VIDA))
 
 func _physics_process(_delta)  -> void:
 	
 	if is_multiplayer_authority():
 		Global.player_master_vida = VIDA
+		
 		#print("La vida global del player es " + str(Global.player_master_vida))
 		set_motion_mode(1)
 		var input_direction = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),Input.get_action_strength("move_down") - Input.get_action_strength("move_up"))
