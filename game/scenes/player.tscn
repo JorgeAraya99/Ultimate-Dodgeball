@@ -62,18 +62,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [4]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:flip_h")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_prjsk"]
 resource_name = "idle_back"
@@ -409,7 +397,7 @@ tracks/4/path = NodePath("Sprite2D:flip_h")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.123794),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -517,7 +505,6 @@ shape = SubResource("CapsuleShape2D_5lo1r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_j3uvv")
-flip_h = true
 hframes = 3
 vframes = 4
 
