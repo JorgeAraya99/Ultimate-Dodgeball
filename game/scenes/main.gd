@@ -52,11 +52,9 @@ func handledead(id): #esta funcion checkea que haya solo un jugador con vida
 		GO+=1
 		get_tree().paused=true
 		
-		
-	
-	
-			
-			
-		
-		
-	
+
+func _on_ball_timer_timeout():
+	var ball_scene = preload("res://scenes/ball.tscn")
+	var ball = ball_scene.instantiate()
+	add_child(ball)
+	ball.position = Vector2(200, 200)
