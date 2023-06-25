@@ -44,6 +44,7 @@ extends CharacterBody2D
 @onready var player_animation: AnimationPlayer = $PlayerAnimation
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/playback")
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 var NORMALSPEED : float = 150
@@ -76,6 +77,9 @@ func init(id):
 	name = str(id)
 	Game.players_id.append(id)
 	Game.players_life[id]=(VIDA)
+	var new_texture = load("res://assets/characters/spritesheets/character1.png")
+	sprite_2d.texture = new_texture
+
 
 #func _on_Area2D_area_exited(area): 
 #	if area.get_name() == "Ball": 
