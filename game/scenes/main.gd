@@ -17,6 +17,7 @@ func _ready() -> void:
 	pnumber=Game.players.size()
 	for i in Game.players.size():
 		var id = Game.players[i]
+		#var rand_skin = randi() % 5
 		var player: Player = player_scene.instantiate()
 		player.dead.connect(handledead)
 		players.add_child(player)
