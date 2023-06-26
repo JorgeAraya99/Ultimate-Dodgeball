@@ -8,11 +8,11 @@ extends Node2D
 @onready var dead_players = 0
 @onready var pnumber
 
+
 const Win_panel =preload("res://scenes/Win_panel.tscn") 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	Game.players.sort()
 	pnumber=Game.players.size()
 	for i in Game.players.size():
@@ -53,8 +53,12 @@ func handledead(id): #esta funcion checkea que haya solo un jugador con vida
 		print(id)
 		GO+=1
 		get_tree().paused=true
-		
-		
+
+func _on_ball_timer_timeout():
+	var ball_scene = preload("res://scenes/ball.tscn")
+	var ball = ball_scene.instantiate()
+	add_child(ball)
+	ball.position = Vector2(200, 200)
 	
 	
 			
