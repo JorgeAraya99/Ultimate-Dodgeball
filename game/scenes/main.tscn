@@ -997,9 +997,3 @@ offset_top = 33.0
 offset_right = 633.0
 offset_bottom = 56.0
 horizontal_alignment = 2
-
-[node name="BallTimer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
-[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
