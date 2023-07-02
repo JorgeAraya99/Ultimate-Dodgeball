@@ -77,7 +77,9 @@ func init(id):
 	name = str(id)
 	Game.players_id.append(id)
 	Game.players_life[id]=(VIDA)
-	var new_texture = load("res://assets/characters/spritesheets/character1.png")
+	var skin = Game.players_skin[id] + 1
+	var skin_route = "res://assets/characters/spritesheets/character"+str(skin)+".png"
+	var new_texture = load(skin_route)
 	sprite_2d.texture = new_texture
 
 

@@ -959,18 +959,18 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="L-shape" parent="." instance=ExtResource("7_mgwii")]
-position = Vector2(323, 193)
+position = Vector2(288, 193)
 collision_layer = 3
 collision_mask = 3
 
 [node name="L-shape2" parent="." instance=ExtResource("8_lbwu6")]
-position = Vector2(1018, 200)
+position = Vector2(1010, 200)
 
 [node name="L-shape3" parent="." instance=ExtResource("9_c10a7")]
-position = Vector2(333, 465)
+position = Vector2(295, 465)
 
 [node name="L-shape4" parent="." instance=ExtResource("10_wcu5m")]
-position = Vector2(1004, 478)
+position = Vector2(1000, 478)
 
 [node name="Players" type="Node2D" parent="."]
 
