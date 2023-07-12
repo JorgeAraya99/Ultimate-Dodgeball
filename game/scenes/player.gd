@@ -56,6 +56,7 @@ var lookdirection = "front"
 
 signal dead(playerid)
 
+const Win_panel =preload("res://scenes/Win_panel.tscn") 
 
 
 var VIDA = 3
@@ -89,6 +90,8 @@ func init(id):
 #		print("Vida total es " + str(VIDA))
 
 func _on_area_2d_area_entered(area):
+		
+	
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA > 0:
 		VIDA -= 1
 		Game.players_life[multiplayer.get_unique_id()]-=1 
@@ -96,11 +99,18 @@ func _on_area_2d_area_entered(area):
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA==0:
 		VIDA -= 1
 		Game.players_life[multiplayer.get_unique_id()]-=1 
-		emit_signal("dead",multiplayer.get_unique_id())
+		handle_player_dead()
+		
+		#emit_signal("dead",multiplayer.get_unique_id())
 		
 	
 		
 		print("Vida total es " + str(VIDA))
+
+func handle_player_dead():
+	var win =Win_panel.instantiate()
+	add_child(win)
+	
 
 func _physics_process(_delta)  -> void:
 	
