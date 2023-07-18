@@ -40,18 +40,6 @@ func _process(_delta):
 #			print("GO")
 #			GO=1
 			
-func handledead(id): #esta funcion checkea que haya solo un jugador con vida
-	if GO==1:
-		pass
-	dead_players +=1
-	if  pnumber - dead_players == 1:
-		var win =Win_panel.instantiate()
-		add_child(win)
-		print("GO handledead")
-		print(self.dead_players)
-		print(id)
-		GO+=1
-		get_tree().paused=true
 
 func _on_ball_timer_timeout():
 	var ball_scene = preload("res://scenes/ball.tscn")
@@ -59,9 +47,31 @@ func _on_ball_timer_timeout():
 	add_child(ball)
 	ball.position = Vector2(640, 385)
 	
+@rpc("any_peer", "call_local")
+func add1():
+	dead_players +=1
+
+@rpc("any_peer", "call_local")
+func handle_player_dead():
+	var win =Win_panel.instantiate()
+	add_child(win)
+	get_tree().paused=true
 	
-			
-			
-		
-		
+func handledead(id): #esta funcion checkea que haya solo un jugador con vida
+	if GO==1:
+		pass
+	rpc("add1")
+	print("jugadores muertos:",dead_players)
+	print("numero de jug:",pnumber)
+	if pnumber - dead_players == 1:
+		print(pnumber - dead_players)
+		var win =Win_panel.instantiate()
+		add_child(win)
+		print("GO handledead")
+		print(self.dead_players)
+		print(id)
+		rpc("handle_player_dead")
+
+		GO+=1
+		get_tree().paused=true
 	

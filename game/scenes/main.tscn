@@ -982,6 +982,9 @@ position = Vector2(401, 389)
 [node name="Marker2D2" type="Marker2D" parent="Markers"]
 position = Vector2(909, 397)
 
+[node name="Marker2D3" type="Marker2D" parent="Markers"]
+position = Vector2(643, 580)
+
 [node name="Ball" parent="." instance=ExtResource("3_m0e2w")]
 position = Vector2(641, 388)
 

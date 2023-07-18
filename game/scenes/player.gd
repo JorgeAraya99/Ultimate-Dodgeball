@@ -90,7 +90,6 @@ func init(id):
 #		print("Vida total es " + str(VIDA))
 
 func _on_area_2d_area_entered(area):
-		
 	
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA > 0:
 		VIDA -= 1
@@ -98,13 +97,9 @@ func _on_area_2d_area_entered(area):
 		
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA==0:
 		VIDA -= 1
-		Game.players_life[multiplayer.get_unique_id()]-=1 
-		handle_player_dead()
+		Game.players_life[multiplayer.get_unique_id()]-=1
 		
-		#emit_signal("dead",multiplayer.get_unique_id())
-		
-	
-		
+		emit_signal("dead",multiplayer.get_unique_id())
 		print("Vida total es " + str(VIDA))
 
 func handle_player_dead():

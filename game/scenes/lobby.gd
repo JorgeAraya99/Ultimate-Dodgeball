@@ -135,27 +135,21 @@ func _on_cancel_pressed():
 
 func _on_prev_pressed() -> void:
 	var id = multiplayer.get_unique_id()
-	print("local says:"+str(Game.players_skin[id]))
 	if Game.players_skin[id] == 0:
 		Game.players_skin[id] = 4
 	else: 
 		Game.players_skin[id] -= 1
-	print("local says:"+str(Game.players_skin[id]))
 	rpc("change_player_skin", Game.players_skin[id])
 		
 
 func _on_next_pressed() -> void:
 	var id = multiplayer.get_unique_id()
-	print("local says:"+str(Game.players_skin[id]))
 	var next_skin = (Game.players_skin[id] + 1) % 5
 	Game.players_skin[id] = next_skin
-	print("local says:"+str(Game.players_skin[id]))
 	rpc("change_player_skin", next_skin)
 	
 @rpc("reliable","any_peer")
 func change_player_skin(new_skin) -> void:
 	var sender_id = multiplayer.get_remote_sender_id()
-	print("remote says:"+str(Game.players_skin[sender_id]))
 	Game.players_skin[sender_id] = new_skin
-	print("remote says:"+str(Game.players_skin[sender_id]))
 		
