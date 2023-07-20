@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkiy5uwggdfwb"]
+
+[ext_resource type="PackedScene" uid="uid://dl64hmyxcmidc" path="res://scenes/PowerUps/PowerUp.tscn" id="1_q8nsj"]
+[ext_resource type="Script" path="res://scenes/PowerUps/Escudo_PowerUp.gd" id="2_p530k"]
+
+[node name="Escudo_PowerUp" instance=ExtResource("1_q8nsj")]
+script = ExtResource("2_p530k")
