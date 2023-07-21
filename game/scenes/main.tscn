@@ -1007,6 +1007,8 @@ wait_time = 5.0
 autostart = true
 
 [node name="Escudo_PowerUp" parent="." instance=ExtResource("13_tuqrs")]
-position = Vector2(84, 59)
+position = Vector2(313, 249)
+collision_layer = 3
+collision_mask = 3
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]

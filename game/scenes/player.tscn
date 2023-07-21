@@ -415,10 +415,10 @@ transitions = ["idle_front", "move_front", SubResource("AnimationNodeStateMachin
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_iudr7"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xqqn5")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Players"]]
 collision_layer = 2
 collision_mask = 2
 
@@ -453,4 +453,11 @@ one_shot = true
 [node name="dashCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="InvinsibilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="EscudoTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="InvinsibilityTimer" to="." method="_on_invinsibility_timer_timeout"]
+[connection signal="timeout" from="EscudoTimer" to="." method="_on_escudo_timer_timeout"]

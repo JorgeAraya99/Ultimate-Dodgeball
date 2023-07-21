@@ -22,12 +22,26 @@ func applyPowerup(player: Player):
 
 func _on_area_entered(area : Area2D):
 	print("area entered")
+#	queue_free()
+#	if area.get_parent().get_class() == "CharacterBody2D":
+#		pass
+#		print("player = area")
+#		#applyPowerup(area.get_parent())
+#
+#	print(area.name)
+#	print(str(area.get_parent().get_groups()))
+#	print("player != area")
+		
+
+
+func _on_body_entered(body):
+	#print("area entered")
 	queue_free()
-	if area.get_parent().get_class() == "CharacterBody2D":
+	if body.get_class() == "CharacterBody2D":
 		
-		print("player = area")
-		applyPowerup(area.get_parent())
+		#print("player = area")
+		applyPowerup(body)
 		queue_free()
-	print(str(area.get_parent().get_class()))
-	print("player != area")
 		
+	print(str(body))
+	#print("player != area")

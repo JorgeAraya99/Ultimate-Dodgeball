@@ -13,5 +13,5 @@ func _physics_process(delta):
 	else:
 		var collision_info = move_and_collide(velocity*delta)
 		if collision_info:
-			print("I collided with ", collision_info.get_collider().name)
+			#print("I collided with ", collision_info.get_collider().name)
 			velocity = velocity.bounce(collision_info.get_normal())

@@ -45,6 +45,9 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback = animation_tree.get("parameters/playback")
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var inviTimer = $InvinsibilityTimer
+@onready var escudoTimer = $InvinsibilityTimer
+@onready var escudobool= false
 
 
 var NORMALSPEED : float = 150
@@ -53,6 +56,7 @@ var DASHDURATION : float = .1
 var dashdirection = Vector2()
 var DASHCOOLDOWNDUR : float = 4
 var lookdirection = "front"
+var damageInvi: float = 2.0
 
 signal dead(playerid)
 
@@ -89,11 +93,24 @@ func init(id):
 #		VIDA -= 1
 #		print("Vida total es " + str(VIDA))
 
+
+
 func _on_area_2d_area_entered(area):
+	print("hit")
+	
+	if escudobool == true:
+		escudoTimer.stop()
+		escudobool=false
+		return
+	
+	if !inviTimer.is_stopped():
+		return
 	
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA > 0:
 		VIDA -= 1
 		Game.players_life[multiplayer.get_unique_id()]-=1 
+		print("hit, start timer")
+		inviTimer.start(damageInvi)
 		
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA==0:
 		VIDA -= 1
@@ -168,12 +185,19 @@ func start_dashcooldown(dur) -> void:
 func is_dashcooldown_down() -> bool:
 	return dash_cooldown.is_stopped()
 	
-func escudo():
-	print("1")
+func escudo(time):
+	escudobool = true
+	escudoTimer.start(time)
+	print("escudo star")
 	set_collision_layer_value(2, true)
 
 
 
+func _on_invinsibility_timer_timeout():
+	print("invi timeout")
+	
 
 
-
+func _on_escudo_timer_timeout():
+	escudobool = false
+	print("escudo timeout")
