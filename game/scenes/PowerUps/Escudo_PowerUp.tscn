@@ -5,3 +5,7 @@
 
 [node name="Escudo_PowerUp" instance=ExtResource("1_q8nsj")]
 script = ExtResource("2_p530k")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(1.19209e-07, -1.19209e-07)
+scale = Vector2(1.25, 1.25)

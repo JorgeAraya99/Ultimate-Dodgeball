@@ -14,13 +14,20 @@ func _process(delta):
 	pass
 
 func _physics_process(delta):
-	position
-
-func applyPowerup(player: Player):
 	pass
 
-func _on_area_entered(area):
-	if area == Player:
-		applyPowerup(area)
+func applyPowerup(player: Player):
+	print("applypowerup padre")
+	pass
+
+func _on_area_entered(area : Area2D):
+	print("area entered")
+	queue_free()
+	if area.get_parent().get_class() == "CharacterBody2D":
+		
+		print("player = area")
+		applyPowerup(area.get_parent())
 		queue_free()
+	print(str(area.get_parent().get_class()))
+	print("player != area")
 		

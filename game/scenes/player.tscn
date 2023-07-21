@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b68wgany2pver"]
+[gd_scene load_steps=41 format=3 uid="uid://b68wgany2pver"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_xqqn5"]
 [ext_resource type="Texture2D" uid="uid://c235gm5agoui7" path="res://assets/characters/spritesheets/character1.png" id="2_sqvv4"]
@@ -413,11 +413,13 @@ states/move_right/node = SubResource("AnimationNodeAnimation_2magf")
 states/move_right/position = Vector2(402, 222)
 transitions = ["idle_front", "move_front", SubResource("AnimationNodeStateMachineTransition_hh0qc"), "move_front", "idle_front", SubResource("AnimationNodeStateMachineTransition_icv16"), "Start", "idle_front", SubResource("AnimationNodeStateMachineTransition_3aoau"), "move_front", "move_back", SubResource("AnimationNodeStateMachineTransition_233uq"), "move_back", "move_front", SubResource("AnimationNodeStateMachineTransition_3q4fg"), "idle_front", "move_back", SubResource("AnimationNodeStateMachineTransition_yx8ql"), "move_back", "idle_front", SubResource("AnimationNodeStateMachineTransition_dh065"), "idle_front", "move_right", SubResource("AnimationNodeStateMachineTransition_8nd4q"), "move_right", "idle_front", SubResource("AnimationNodeStateMachineTransition_6brre"), "move_front", "move_right", SubResource("AnimationNodeStateMachineTransition_ub8bi"), "move_right", "move_front", SubResource("AnimationNodeStateMachineTransition_wagfp"), "move_right", "move_back", SubResource("AnimationNodeStateMachineTransition_7wdtv"), "move_back", "move_right", SubResource("AnimationNodeStateMachineTransition_rivvk"), "idle_front", "move_left", SubResource("AnimationNodeStateMachineTransition_0b35q"), "move_left", "idle_front", SubResource("AnimationNodeStateMachineTransition_2guae"), "move_left", "move_front", SubResource("AnimationNodeStateMachineTransition_ikl8k"), "move_front", "move_left", SubResource("AnimationNodeStateMachineTransition_2l030"), "move_left", "move_back", SubResource("AnimationNodeStateMachineTransition_5i5j0"), "move_back", "move_left", SubResource("AnimationNodeStateMachineTransition_sw0cj"), "move_right", "move_left", SubResource("AnimationNodeStateMachineTransition_kab7r"), "move_left", "move_right", SubResource("AnimationNodeStateMachineTransition_fp1w4")]
 
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_iudr7"]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_xqqn5")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -443,6 +445,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_bsiho")
 anim_player = NodePath("../PlayerAnimation")
 active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_iudr7")
 
 [node name="dashTimer" type="Timer" parent="."]
 one_shot = true

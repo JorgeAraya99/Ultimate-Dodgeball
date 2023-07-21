@@ -167,6 +167,10 @@ func start_dashcooldown(dur) -> void:
 	
 func is_dashcooldown_down() -> bool:
 	return dash_cooldown.is_stopped()
+	
+func escudo():
+	print("1")
+	set_collision_layer_value(2, true)
 
 
 
