@@ -101,6 +101,8 @@ func _on_area_2d_area_entered(area):
 	if escudobool == true:
 		escudoTimer.stop()
 		escudobool=false
+		print("coliison layer deactivate")
+		set_collision_layer_value(2, false)
 		return
 	
 	if !inviTimer.is_stopped():
@@ -109,7 +111,7 @@ func _on_area_2d_area_entered(area):
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA > 0:
 		VIDA -= 1
 		Game.players_life[multiplayer.get_unique_id()]-=1 
-		print("hit, start timer")
+		
 		inviTimer.start(damageInvi)
 		
 	if area.get_name() == "Balon" and is_multiplayer_authority() and VIDA==0:
@@ -188,7 +190,7 @@ func is_dashcooldown_down() -> bool:
 func escudo(time):
 	escudobool = true
 	escudoTimer.start(time)
-	print("escudo star")
+	print("escudo start")
 	set_collision_layer_value(2, true)
 
 
@@ -197,4 +199,5 @@ func _on_invinsibility_timer_timeout():
 	
 func _on_escudo_timer_timeout():
 	escudobool = false
+	set_collision_layer_value(2, false)
 	print("escudo timeout")
