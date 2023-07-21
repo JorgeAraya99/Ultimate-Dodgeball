@@ -50,6 +50,10 @@ extends CharacterBody2D
 @onready var escudobool= false
 @onready var playername: Label = $Playername
 
+@onready var playerdash: Sprite2D = $Playerdash
+@onready var dashcd_animation: AnimationPlayer = $DashCDAnimation
+@onready var shield_sprite: Sprite2D = $ShieldSprite
+@onready var shield_animation: AnimationPlayer = $ShieldAnimation
 
 var NORMALSPEED : float = 150
 var DASHSPEED : float = 500
@@ -69,8 +73,10 @@ var VIDA = 5
 func _ready():
 	
 	await get_tree().process_frame
+	shield_sprite.visible = false
+	playerdash.visible = false
+	animation_tree.active = true
 	if is_multiplayer_authority():
-		animation_tree.active = true
 		Global.player_master=self
 		
 	
@@ -101,7 +107,7 @@ func _on_area_2d_area_entered(area):
 	print("hit")
 	
 	if escudobool == true and area.get_name() == "Balon" :
-		pass
+		return
 #		escudoTimer.stop()
 #		escudobool=false
 #		print("coliison layer deactivate")
@@ -185,6 +191,9 @@ func is_dashing() -> bool:
 
 func start_dashcooldown(dur) -> void:
 	dash_cooldown.wait_time = dur
+	if is_multiplayer_authority():
+		playerdash.visible = true
+		dashcd_animation.play("dash_cooldown")
 	dash_cooldown.start()
 	
 func is_dashcooldown_down() -> bool:
@@ -192,6 +201,9 @@ func is_dashcooldown_down() -> bool:
 	
 func escudo(time):
 	escudobool = true
+	if is_multiplayer_authority():
+		shield_sprite.visible = true
+		shield_animation.play("shield_active")
 	escudoTimer.start(time)
 	print("colision layer activate")
 	set_collision_layer_value(2, true)
@@ -202,6 +214,13 @@ func _on_invinsibility_timer_timeout():
 	
 func _on_escudo_timer_timeout():
 	escudobool = false
+	shield_sprite.visible = false
+	shield_animation.stop()
 	set_collision_layer_value(2, false)
 	print("escudo timeout")
 	print("layer deactivate")
+
+
+func _on_dash_cooldown_timeout() -> void:
+	if is_multiplayer_authority():
+		playerdash.visible = false

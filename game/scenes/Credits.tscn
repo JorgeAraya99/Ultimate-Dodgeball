@@ -927,6 +927,8 @@ layout_mode = 2
 
 [node name="Button" type="Button" parent="MarginContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Return
 "
 
@@ -939,8 +941,10 @@ offset_bottom = 290.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer"]
 layout_mode = 2
+theme_override_colors/default_color = Color(0, 0.85098, 1, 1)
 theme_override_font_sizes/normal_font_size = 14
-text = "                                               CREDITOS    
+text = "                                              
+												 CREDITS    
 
 
 
@@ -948,9 +952,9 @@ text = "                                               CREDITOS
 								Agustín Cortés
 								Jesús Cáceres
 
-    Sprites de mapa: Pupkin - Tech Dungeon Roguelite
-  	Sprites de personajes: @lotus_totus - Character Pack
-	Fuente de texto: Vladimirnikolic - Ecco Font
+    MAP SPRITES: Pupkin - Tech Dungeon Roguelite
+  	CHARACTER SPRITES: @lotus_totus - Character Pack
+	TEXT FONT: Vladimirnikolic - Ecco Font
 "
 
 [connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]

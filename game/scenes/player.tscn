@@ -1,15 +1,17 @@
-[gd_scene load_steps=42 format=3 uid="uid://b68wgany2pver"]
+[gd_scene load_steps=49 format=3 uid="uid://b68wgany2pver"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_xqqn5"]
 [ext_resource type="Texture2D" uid="uid://c235gm5agoui7" path="res://assets/characters/spritesheets/character1.png" id="2_sqvv4"]
 [ext_resource type="FontFile" uid="uid://cfwfk77jv856x" path="res://resources/fonts/Ecco.ttf" id="3_xkaio"]
+[ext_resource type="Texture2D" uid="uid://ccn7v07rv4xf5" path="res://assets/Effects/dash_anim.png" id="4_1vv1v"]
+[ext_resource type="Texture2D" uid="uid://dlv7krm1g166d" path="res://assets/Effects/shield.png" id="5_nolm2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_erfkq"]
 radius = 9.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5lo1r"]
-radius = 9.0
-height = 18.0
+radius = 8.0
+height = 16.0
 
 [sub_resource type="Animation" id="Animation_110pp"]
 length = 0.001
@@ -415,6 +417,65 @@ transitions = ["idle_front", "move_front", SubResource("AnimationNodeStateMachin
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_e6u6p"]
 
+[sub_resource type="Animation" id="Animation_dqphf"]
+resource_name = "dash_cooldown"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Playerdash:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.6, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5viaa"]
+_data = {
+"dash_cooldown": SubResource("Animation_dqphf")
+}
+
+[sub_resource type="Animation" id="Animation_p71p8"]
+resource_name = "shield_active"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShieldSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_s4sts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShieldSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0o57"]
+_data = {
+"RESET": SubResource("Animation_s4sts"),
+"shield_active": SubResource("Animation_p71p8")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xqqn5")
 
@@ -444,7 +505,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_bsiho")
 anim_player = NodePath("../PlayerAnimation")
-active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_e6u6p")
 
 [node name="dashTimer" type="Timer" parent="."]
@@ -464,12 +524,34 @@ offset_left = -109.0
 offset_top = -37.0
 offset_right = 110.0
 offset_bottom = -11.0
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
 theme_override_fonts/font = ExtResource("3_xkaio")
 theme_override_font_sizes/font_size = 15
 text = "epic"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Playerdash" type="Sprite2D" parent="."]
+position = Vector2(2, 30)
+texture = ExtResource("4_1vv1v")
+hframes = 4
+region_rect = Rect2(96, 0, 32, 32)
+
+[node name="DashCDAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5viaa")
+}
+
+[node name="ShieldSprite" type="Sprite2D" parent="."]
+texture = ExtResource("5_nolm2")
+hframes = 4
+
+[node name="ShieldAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c0o57")
+}
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="dashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="InvinsibilityTimer" to="." method="_on_invinsibility_timer_timeout"]
 [connection signal="timeout" from="EscudoTimer" to="." method="_on_escudo_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://sewngur0b3bu"]
+[gd_scene load_steps=20 format=3 uid="uid://sewngur0b3bu"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_5x3op"]
 [ext_resource type="PackedScene" uid="uid://b68wgany2pver" path="res://scenes/player.tscn" id="2_bt3dx"]
@@ -12,9 +12,8 @@
 [ext_resource type="Script" path="res://scenes/Camera2D.gd" id="8_ql7xy"]
 [ext_resource type="PackedScene" uid="uid://46s3eej0k0oe" path="res://assets/Structures/l_shape3.tscn" id="9_c10a7"]
 [ext_resource type="PackedScene" uid="uid://bwbm872hyfoxq" path="res://assets/Structures/l_shape4.tscn" id="10_wcu5m"]
+[ext_resource type="Texture2D" uid="uid://cra55q3vin66r" path="res://assets/Effects/portal.png" id="11_jx01e"]
 [ext_resource type="Texture2D" uid="uid://dosetwnd2o44m" path="res://assets/Hud/charheart.png" id="13_d3aok"]
-[ext_resource type="PackedScene" uid="uid://bkiy5uwggdfwb" path="res://scenes/PowerUps/Escudo_PowerUp.tscn" id="13_tuqrs"]
-[ext_resource type="Texture2D" uid="uid://ccn7v07rv4xf5" path="res://assets/Effects/dash_anim.png" id="14_a3sut"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h8kjm"]
 texture = ExtResource("5_o0k6b")
@@ -912,84 +911,44 @@ texture = ExtResource("5_o0k6b")
 [sub_resource type="TileSet" id="TileSet_xu0f3"]
 sources/0 = SubResource("TileSetAtlasSource_h8kjm")
 
-[sub_resource type="Animation" id="Animation_2lwto"]
+[sub_resource type="Animation" id="Animation_a8d3q"]
+resource_name = "portal_active"
+length = 5.0
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PortalSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6, 4.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 3, 2, 3, 2]
+}
+
+[sub_resource type="Animation" id="Animation_e5a2m"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Playerdash:frame")
+tracks/0/path = NodePath("PortalSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_g6pis"]
-resource_name = "dash_enabled"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Playerdash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
-[sub_resource type="Animation" id="Animation_dqphf"]
-resource_name = "dash_cooldown"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Playerdash:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5viaa"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bhurw"]
 _data = {
-"RESET": SubResource("Animation_2lwto"),
-"dash_cooldown": SubResource("Animation_dqphf"),
-"dash_enabled": SubResource("Animation_g6pis")
+"RESET": SubResource("Animation_e5a2m"),
+"portal_active": SubResource("Animation_a8d3q")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j8ohe"]
-animation = &"dash_cooldown"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lrjlo"]
-animation = &"dash_enabled"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r5hva"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ko0gh"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h2m8a"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ns40j"]
-states/Start/position = Vector2(176, 105)
-states/dash_cooldown/node = SubResource("AnimationNodeAnimation_j8ohe")
-states/dash_cooldown/position = Vector2(666, 135)
-states/dash_enabled/node = SubResource("AnimationNodeAnimation_lrjlo")
-states/dash_enabled/position = Vector2(409, 62)
-transitions = ["Start", "dash_enabled", SubResource("AnimationNodeStateMachineTransition_r5hva"), "dash_enabled", "dash_cooldown", SubResource("AnimationNodeStateMachineTransition_ko0gh"), "dash_cooldown", "dash_enabled", SubResource("AnimationNodeStateMachineTransition_h2m8a")]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_evylg"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5x3op")
@@ -1070,6 +1029,16 @@ position = Vector2(643, 612)
 [node name="Marker2D4" type="Marker2D" parent="Markers"]
 position = Vector2(640, 171)
 
+[node name="PortalSprite" type="Sprite2D" parent="."]
+position = Vector2(641, 388)
+texture = ExtResource("11_jx01e")
+hframes = 4
+
+[node name="PortalAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bhurw")
+}
+
 [node name="Ball" parent="." instance=ExtResource("3_m0e2w")]
 position = Vector2(641, 388)
 
@@ -1094,41 +1063,12 @@ offset_bottom = 57.0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Playerdash" type="Sprite2D" parent="Camera2D/HUD"]
-position = Vector2(603, 83)
-texture = ExtResource("14_a3sut")
-hframes = 4
-frame = 3
-region_rect = Rect2(96, 0, 32, 32)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/HUD"]
-libraries = {
-"": SubResource("AnimationLibrary_5viaa")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="Camera2D/HUD"]
-tree_root = SubResource("AnimationNodeStateMachine_ns40j")
-anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_evylg")
-
 [node name="BallTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[node name="Escudo_PowerUp" parent="." instance=ExtResource("13_tuqrs")]
-position = Vector2(317, 519)
-
-[node name="Escudo_PowerUp3" parent="." instance=ExtResource("13_tuqrs")]
-position = Vector2(970, 251)
-
-[node name="Escudo_PowerUp4" parent="." instance=ExtResource("13_tuqrs")]
-position = Vector2(971, 519)
-
-[node name="Escudo_PowerUp2" parent="." instance=ExtResource("13_tuqrs")]
-position = Vector2(313, 249)
-
 [node name="PowerUptimer" type="Timer" parent="."]
-wait_time = 35.0
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]

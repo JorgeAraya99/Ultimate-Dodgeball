@@ -9,6 +9,7 @@ extends Node2D
 @onready var pnumber
 @onready var animation_player: AnimationPlayer = $Camera2D/HUD/AnimationPlayer
 @onready var animation_tree: AnimationTree = $Camera2D/HUD/AnimationTree
+@onready var portal_animation: AnimationPlayer = $PortalAnimation
 
 @onready var dead=false 
 
@@ -17,6 +18,7 @@ const Win_panel =preload("res://scenes/Win_panel.tscn")
 func _ready() -> void:
 	Game.players.sort()
 	pnumber=Game.players.size()
+	portal_animation.play("portal_active")
 	for i in Game.players.size():
 		var id = Game.players[i]
 		#var rand_skin = randi() % 5
@@ -74,10 +76,16 @@ func handledead(id): #esta funcion checkea que haya solo un jugador con vida
 
 
 func _on_power_uptimer_timeout():
-	pass
-#	var Powerup_scene = preload("res://scenes/PowerUps/Escudo_PowerUp.tscn")
-#	var Powerup = Powerup_scene .instantiate()
-#	add_child(Powerup)
-#	Powerup.position = Vector2(640, 385)
-	
-	
+	var Powerup_scene = preload("res://scenes/PowerUps/Escudo_PowerUp.tscn")
+	var Powerup = Powerup_scene.instantiate()
+	add_child(Powerup)
+	var rand_position = randi_range(0,7)
+	match rand_position:
+		0: Powerup.position = Vector2(100, 100)
+		1: Powerup.position = Vector2(100, 650)
+		2: Powerup.position = Vector2(1180, 100)
+		3: Powerup.position = Vector2(1180, 650)
+		4: Powerup.position = Vector2(320, 250)
+		5: Powerup.position = Vector2(955, 250)
+		6: Powerup.position = Vector2(320, 520)
+		7: Powerup.position = Vector2(955, 520)

@@ -931,6 +931,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/Start"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
 text = "Name:
 "
 
@@ -942,6 +943,7 @@ max_length = 10
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/Start"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
 text = "IP:
 "
 
@@ -960,16 +962,22 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Host"
 
 [node name="Join" type="Button" parent="PanelContainer/MarginContainer/Start/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Join"
 
 [node name="Return" type="Button" parent="PanelContainer/MarginContainer/Start/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Return
 "
 
@@ -988,6 +996,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
 text = "Players"
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/VBoxContainer"]
@@ -1003,10 +1012,13 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
 text = "Character"
 
 [node name="Prev" type="Button" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Prev"
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
@@ -1016,6 +1028,8 @@ expand_mode = 4
 
 [node name="Next" type="Button" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Next
 "
 
@@ -1025,11 +1039,15 @@ layout_mode = 2
 [node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/Pending/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Cancel"
 
 [node name="Ok" type="Button" parent="PanelContainer/MarginContainer/Pending/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0.85098, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85098, 0.129412, 0.129412, 1)
 text = "Ready"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Start/VBoxContainer/Return" to="." method="_on_return_pressed"]

@@ -8,8 +8,14 @@ func _physics_process(delta):
 	
 	if inicio == 1:
 		velocity = Vector2(200,200)
+		var rand_vel = randi_range(0,3)
 		inicio = 0
-	
+		match rand_vel:
+			0: velocity = Vector2(200,200)
+			1: velocity = Vector2(200,-200)
+			2: velocity = Vector2(-200,200)
+			3: velocity = Vector2(-200,-200)
+		
 	else:
 		var collision_info = move_and_collide(velocity*delta)
 		if collision_info:
