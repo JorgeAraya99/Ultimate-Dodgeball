@@ -2,6 +2,7 @@ extends MarginContainer
 
 const MAX_PLAYERS = 4
 const PORT = 5300
+var character_index: int = 0
 
 @onready var user = %User
 @onready var ip = %IP
@@ -11,6 +12,7 @@ const PORT = 5300
 @onready var start = %Start
 @onready var pending = %Pending
 @onready var players: VBoxContainer = %Players
+@onready var char_text: TextureRect = $PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer/TextureRect
 
 @onready var cancel: Button = $PanelContainer/MarginContainer/Pending/HBoxContainer/Cancel
 @onready var ok: Button = $PanelContainer/MarginContainer/Pending/HBoxContainer/Ok
@@ -31,7 +33,6 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	start.show()
 	pending.hide()
-	#user.text = OS.get_environment("USERNAME")
 	cancel.pressed.connect(_on_cancel_pressed)
 	ok.pressed.connect(_on_ok_pressed)
 	prev.pressed.connect(_on_prev_pressed)
@@ -78,6 +79,7 @@ func _add_player(name: String, id: int):
 	label.name = str(id)
 	label.text = name
 	players.add_child(label)
+	Game.players_name[id] = name
 	Game.players.append(id)
 	Game.players_skin[id] = 0
 
@@ -137,8 +139,11 @@ func _on_prev_pressed() -> void:
 	var id = multiplayer.get_unique_id()
 	if Game.players_skin[id] == 0:
 		Game.players_skin[id] = 4
+		character_index = 4
 	else: 
 		Game.players_skin[id] -= 1
+		character_index -= 1
+	char_text.texture = load("res://assets/characters/spritesheets/char"+str(character_index+1)+"face.png")
 	rpc("change_player_skin", Game.players_skin[id])
 		
 
@@ -146,6 +151,8 @@ func _on_next_pressed() -> void:
 	var id = multiplayer.get_unique_id()
 	var next_skin = (Game.players_skin[id] + 1) % 5
 	Game.players_skin[id] = next_skin
+	character_index = next_skin
+	char_text.texture = load("res://assets/characters/spritesheets/char"+str(character_index+1)+"face.png")
 	rpc("change_player_skin", next_skin)
 	
 @rpc("reliable","any_peer")

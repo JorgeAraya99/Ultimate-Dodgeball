@@ -7,6 +7,8 @@ extends Node2D
 @onready var GO=0
 @onready var dead_players = 0
 @onready var pnumber
+@onready var animation_player: AnimationPlayer = $Camera2D/HUD/AnimationPlayer
+@onready var animation_tree: AnimationTree = $Camera2D/HUD/AnimationTree
 
 
 const Win_panel =preload("res://scenes/Win_panel.tscn") 

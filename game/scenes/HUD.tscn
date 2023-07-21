@@ -1,13 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://di545gebddhfm"]
+[gd_scene load_steps=3 format=3 uid="uid://dnv8n7jhurtih"]
 
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_torgh"]
+[ext_resource type="Texture2D" uid="uid://dosetwnd2o44m" path="res://assets/Hud/charheart.png" id="2_lbvmi"]
 
 [node name="HUD" type="Node2D"]
 script = ExtResource("1_torgh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="VIDAS" type="Label" parent="CanvasLayer"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 offset_right = 40.0
-offset_bottom = 23.0
-text = "VIDAS:0"
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("2_lbvmi")
+
+[node name="VIDAS" type="Label" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1

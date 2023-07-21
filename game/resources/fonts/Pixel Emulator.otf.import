@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://cp2ea5i0gcyvn"
+path="res://.godot/imported/Pixel Emulator.otf-c438ab5684f1f8b0f49db9d87fcc40d6.fontdata"
+
+[deps]
+
+source_file="res://resources/fonts/Pixel Emulator.otf"
+dest_files=["res://.godot/imported/Pixel Emulator.otf-c438ab5684f1f8b0f49db9d87fcc40d6.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

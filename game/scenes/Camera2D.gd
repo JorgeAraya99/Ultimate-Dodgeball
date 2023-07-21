@@ -19,6 +19,6 @@ func _process(_delta):
 	if Global.player_master != null:
 		global_position = Global.player_master.global_position
 		target_vida = Global.player_master_vida
-		$HUD/Label.text = "VIDA=" + str(target_vida)
+		$HUD/Label.text = str(target_vida)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 

@@ -939,13 +939,18 @@ offset_bottom = 290.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer"]
 layout_mode = 2
-text = "                                               CREDITS    
+theme_override_font_sizes/normal_font_size = 14
+text = "                                               CREDITOS    
 
 
 
-      Juego hecho por Jorge Araya, Agustín Cortés y Jesús Cáceres
+    Game devs: 		Jorge Araya
+								Agustín Cortés
+								Jesús Cáceres
 
-    Sprites de mapa hecho por Pupkin - Tech Dungeon Roguelite
-  Sprites de personajes hecho por @lotus_totus - Character Pack"
+    Sprites de mapa: Pupkin - Tech Dungeon Roguelite
+  	Sprites de personajes: @lotus_totus - Character Pack
+	Fuente de texto: Vladimirnikolic - Ecco Font
+"
 
 [connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]

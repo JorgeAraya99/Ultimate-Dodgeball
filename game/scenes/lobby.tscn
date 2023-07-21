@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbdvrfp88twlr"]
+[gd_scene load_steps=7 format=3 uid="uid://cbdvrfp88twlr"]
 
 [ext_resource type="Theme" uid="uid://ckr5md3a5p164" path="res://resources/theme.tres" id="1_71eyo"]
 [ext_resource type="Script" path="res://scenes/lobby.gd" id="2_iykto"]
 [ext_resource type="Texture2D" uid="uid://bp3c1ytdxkd2k" path="res://assets/Map/tileset x1.png" id="3_mly7j"]
+[ext_resource type="Texture2D" uid="uid://c7qali0ltdfly" path="res://assets/characters/spritesheets/char1face.png" id="4_gv0ok"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mgfy"]
 texture = ExtResource("3_mly7j")
@@ -937,6 +938,7 @@ text = "Name:
 unique_name_in_owner = true
 layout_mode = 2
 text = "Player"
+max_length = 10
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/Start"]
 layout_mode = 2
@@ -1001,11 +1003,16 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
 layout_mode = 2
-text = "Style"
+text = "Character"
 
 [node name="Prev" type="Button" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
 layout_mode = 2
 text = "Prev"
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
+layout_mode = 2
+texture = ExtResource("4_gv0ok")
+expand_mode = 4
 
 [node name="Next" type="Button" parent="PanelContainer/MarginContainer/Pending/HBoxContainer2/StyleSelectContainer"]
 layout_mode = 2

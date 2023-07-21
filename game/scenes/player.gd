@@ -48,6 +48,7 @@ extends CharacterBody2D
 @onready var inviTimer = $InvinsibilityTimer
 @onready var escudoTimer = $InvinsibilityTimer
 @onready var escudobool= false
+@onready var playername: Label = $Playername
 
 
 var NORMALSPEED : float = 150
@@ -82,6 +83,7 @@ func init(id):
 	name = str(id)
 	Game.players_id.append(id)
 	Game.players_life[id]=(VIDA)
+	playername.text = Game.players_name[id]
 	var skin = Game.players_skin[id] + 1
 	var skin_route = "res://assets/characters/spritesheets/character"+str(skin)+".png"
 	var new_texture = load(skin_route)
