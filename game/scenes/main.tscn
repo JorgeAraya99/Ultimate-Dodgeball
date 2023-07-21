@@ -1116,8 +1116,20 @@ wait_time = 5.0
 autostart = true
 
 [node name="Escudo_PowerUp" parent="." instance=ExtResource("13_tuqrs")]
+position = Vector2(317, 519)
+
+[node name="Escudo_PowerUp3" parent="." instance=ExtResource("13_tuqrs")]
+position = Vector2(970, 251)
+
+[node name="Escudo_PowerUp4" parent="." instance=ExtResource("13_tuqrs")]
+position = Vector2(971, 519)
+
+[node name="Escudo_PowerUp2" parent="." instance=ExtResource("13_tuqrs")]
 position = Vector2(313, 249)
-collision_layer = 3
-collision_mask = 3
+
+[node name="PowerUptimer" type="Timer" parent="."]
+wait_time = 35.0
+autostart = true
 
 [connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
+[connection signal="timeout" from="PowerUptimer" to="." method="_on_power_uptimer_timeout"]

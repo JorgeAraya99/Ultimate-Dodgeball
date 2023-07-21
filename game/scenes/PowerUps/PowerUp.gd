@@ -10,18 +10,17 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
-func applyPowerup(player: Player):
-	print("applypowerup padre")
+func applyPowerup(_player: Player):
 	pass
 
 func _on_area_entered(area : Area2D):
-	print("area entered")
+	pass
 #	queue_free()
 #	if area.get_parent().get_class() == "CharacterBody2D":
 #		pass
@@ -43,5 +42,3 @@ func _on_body_entered(body):
 		applyPowerup(body)
 		queue_free()
 		
-	print(str(body))
-	#print("player != area")
