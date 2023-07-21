@@ -3,13 +3,12 @@
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_xqqn5"]
 [ext_resource type="Texture2D" uid="uid://c235gm5agoui7" path="res://assets/characters/spritesheets/character1.png" id="2_sqvv4"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yfoxf"]
-radius = 7.0
-height = 18.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_erfkq"]
+radius = 9.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5lo1r"]
-radius = 8.0
-height = 16.0
+radius = 9.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_110pp"]
 length = 0.001
@@ -423,8 +422,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 2)
-shape = SubResource("CapsuleShape2D_yfoxf")
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_erfkq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -457,6 +456,7 @@ one_shot = true
 one_shot = true
 
 [node name="EscudoTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="InvinsibilityTimer" to="." method="_on_invinsibility_timer_timeout"]

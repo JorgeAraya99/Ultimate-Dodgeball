@@ -46,7 +46,7 @@ extends CharacterBody2D
 @onready var playback = animation_tree.get("parameters/playback")
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var inviTimer = $InvinsibilityTimer
-@onready var escudoTimer = $InvinsibilityTimer
+@onready var escudoTimer = $EscudoTimer
 @onready var escudobool= false
 
 
@@ -63,7 +63,7 @@ signal dead(playerid)
 const Win_panel =preload("res://scenes/Win_panel.tscn") 
 
 
-var VIDA = 3
+var VIDA = 5
 
 func _ready():
 	
@@ -74,7 +74,7 @@ func _ready():
 		
 	
 	
-func _process(delta):
+func _process(_delta):
 	pass
 
 func init(id):
@@ -98,12 +98,13 @@ func init(id):
 func _on_area_2d_area_entered(area):
 	print("hit")
 	
-	if escudobool == true:
-		escudoTimer.stop()
-		escudobool=false
-		print("coliison layer deactivate")
-		set_collision_layer_value(2, false)
-		return
+	if escudobool == true and area.get_name() == "Balon" :
+		pass
+#		escudoTimer.stop()
+#		escudobool=false
+#		print("coliison layer deactivate")
+#		set_collision_layer_value(2, false)
+#		return
 	
 	if !inviTimer.is_stopped():
 		return
@@ -190,7 +191,7 @@ func is_dashcooldown_down() -> bool:
 func escudo(time):
 	escudobool = true
 	escudoTimer.start(time)
-	print("escudo start")
+	print("colision layer activate")
 	set_collision_layer_value(2, true)
 
 
@@ -201,3 +202,4 @@ func _on_escudo_timer_timeout():
 	escudobool = false
 	set_collision_layer_value(2, false)
 	print("escudo timeout")
+	print("layer deactivate")

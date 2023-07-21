@@ -70,7 +70,8 @@ func handledead(id): #esta funcion checkea que haya solo un jugador con vida
 	
 
 
-#func _on_power_uptimer_timeout():
+func _on_power_uptimer_timeout():
+	pass
 #	var Powerup_scene = preload("res://scenes/PowerUps/Escudo_PowerUp.tscn")
 #	var Powerup = Powerup_scene .instantiate()
 #	add_child(Powerup)

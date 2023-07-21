@@ -1,5 +1,5 @@
 extends PowerUp
-var inicio = 1
+var inicio: float = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,5 +12,4 @@ func _process(delta):
 	
 
 func applyPowerup(player : Player):
-	print("applypowerup hijo")
-	player.escudo(20)
+	player.escudo(inicio)
