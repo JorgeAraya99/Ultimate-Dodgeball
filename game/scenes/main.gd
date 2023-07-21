@@ -7,9 +7,12 @@ extends Node2D
 @onready var GO=0
 @onready var dead_players = 0
 @onready var pnumber
+@onready var dead=false 
 
 
 const Win_panel =preload("res://scenes/Win_panel.tscn") 
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -55,6 +58,8 @@ func add1():
 func handle_player_dead():
 	var win =Win_panel.instantiate()
 	add_child(win)
+	win.set_title(!dead)
+	
 	get_tree().paused=true
 	
 func handledead(id): #esta funcion checkea que haya solo un jugador con vida
@@ -63,6 +68,7 @@ func handledead(id): #esta funcion checkea que haya solo un jugador con vida
 	rpc("add1")
 	print("jugadores muertos:",dead_players)
 	print("numero de jug:",pnumber)
+	dead = true
 	if pnumber - dead_players == 1:
 		print(pnumber - dead_players)
 		var win =Win_panel.instantiate()

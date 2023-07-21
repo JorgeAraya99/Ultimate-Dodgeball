@@ -119,7 +119,7 @@ func _on_area_2d_area_entered(area):
 		emit_signal("dead",multiplayer.get_unique_id())
 		print("Vida total es " + str(VIDA))
 
-func handle_player_dead():
+func handle_player_dead1():
 	var win =Win_panel.instantiate()
 	add_child(win)
 	
@@ -192,12 +192,9 @@ func escudo(time):
 	set_collision_layer_value(2, true)
 
 
-
 func _on_invinsibility_timer_timeout():
 	print("invi timeout")
 	
-
-
 func _on_escudo_timer_timeout():
 	escudobool = false
 	print("escudo timeout")
